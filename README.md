@@ -30,3 +30,11 @@ Captcha Field needs django-simple-captcha with dependencies (PIL, Pillow) to be 
             'captcha',
             ...
     )
+
+Then you will have to run:
+
+    python manage.py syncdb
+
+and for django-simple-captcha
+
+    python manage.py migrate captcha
