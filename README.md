@@ -15,7 +15,7 @@ Supported form fields:
 First there was an idea to make a CMSPlugin, but I faced redirection problems from plugin render method
 (Yes, I know there is a workaround, using exception and additional middleware).
 
-### Insallation
+### Installation
 
     INSTALLED_APPS = (
            ...
