@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endif%}
+
+{% endblock %}

@@ -1,23 +1,22 @@
 # -*- coding: utf8 -*-
 from django.db import models
-from cms.models.pluginmodel import CMSPlugin
 import datetime
 from django.conf import settings
+from cms.models import Page
 
 
 class UserForm(models.Model):
+    cms_pages = models.ManyToManyField(Page, limit_choices_to={'publisher_is_draft': True}, blank=True, null=True)
     title = models.CharField('Title', max_length=255)
     text_before = models.TextField('Text above form', blank=True)
     text_after = models.TextField('Text below form', blank=True)
     text_after_send = models.TextField('Text after sending form', blank=True)
-    is_active = models.BooleanField('Active', default=False)
-    order = models.PositiveSmallIntegerField('Ordering', default=0)
     create_date = models.DateTimeField('Created', default=datetime.datetime.now())
 
     class Meta:
         verbose_name = 'Form'
         verbose_name_plural = 'Forms'
-        ordering = ['order']
+        ordering = ['title']
 
     def link_to_answers(self):
         return '<a href="/admin/userforms/userformanswer/?userform={0}">{1} => </a>'.format(self.pk, self.answers_count())
@@ -63,7 +62,6 @@ class UserFormField(models.Model):
 class UserFormAnswer(models.Model):
     user_form = models.ForeignKey(UserForm, verbose_name='Form')
     create_date = models.DateTimeField('Created', default=datetime.datetime.now())
-    is_active = models.BooleanField('Active', default=False)
 
     class Meta:
         verbose_name = 'Form answer'
@@ -109,7 +107,3 @@ class UserFormAnswerValue(models.Model):
 
     def __unicode__(self):
         return self.user_form_field.title
-
-
-class UserForms(CMSPlugin):
-    user_form = models.ForeignKey(UserForm)

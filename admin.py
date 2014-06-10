@@ -18,9 +18,11 @@ class UserFormFieldInline(admin.StackedInline):
 
 
 class UserFormsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'link_to_answers', 'is_active')
+    list_display = ('title', 'link_to_answers')
     search_fields = ['title']
     inlines = [UserFormFieldInline]
+    #raw_id_fields = ('cms_pages',)
+    filter_horizontal = ('cms_pages',)
 
     # Add urls for ajax-requests that get and save options for select fields. See admin_views.py.
     def get_urls(self):
@@ -46,11 +48,11 @@ class UserFormAnswerValueInline(admin.StackedInline):
 
 
 class UserFormAnswerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'create_date', 'related_answers', 'is_active')
-    list_filter = ('is_active', 'create_date', UserFormListFilter)
+    list_display = ('id', 'create_date', 'related_answers')
+    list_filter = ('create_date', UserFormListFilter)
     list_per_page = 5
     readonly_fields = ('user_form',)
-    fields = ('user_form', 'create_date', 'is_active')
+    fields = ('user_form', 'create_date')
     inlines = [UserFormAnswerValueInline]
 
     def has_add_permission(self, request):
