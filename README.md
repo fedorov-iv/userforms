@@ -31,6 +31,7 @@ Captcha Field needs django-simple-captcha with dependencies (PIL, Pillow) to be 
             ...
     )
 
+
 Then you will have to run:
 
     python manage.py syncdb
