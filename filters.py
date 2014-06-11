@@ -12,7 +12,7 @@ class UserFormListFilter(admin.SimpleListFilter):
 
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
-    title = 'Форма'
+    title = 'Form'
 
     #template = "admin/select_filter.html"
 

@@ -36,7 +36,7 @@
 
 django.jQuery(function ($) {
 
-    //загрузка сохраненных значений
+    //loading saved options
     $('select[id$="field_type"]').each(function () {
 
         var fieldType = this.options[this.options.selectedIndex].value
@@ -45,10 +45,10 @@ django.jQuery(function ($) {
         if (fieldType == 'select') {
 
             if (fieldId) {
-                var optionsDiv = '<div id="user_field_opts_container_' + this.id + '"><div id="user_field_opts_header_' + this.id + '">Варианты ответа</div><a href="javascript:void(0)" id="user_field_add_btn_' + this.id + '">Добавить вариант</a> <a id="user_field_save_btn_' + this.id + '" href="javascript:void(0)">Сохранить</a></div>';
+                var optionsDiv = '<div id="user_field_opts_container_' + this.id + '"><div id="user_field_opts_header_' + this.id + '">Options</div><a href="javascript:void(0)" id="user_field_add_btn_' + this.id + '">Add option</a> <a id="user_field_save_btn_' + this.id + '" href="javascript:void(0)">Save</a></div>';
                 $('#' + this.id).after(optionsDiv);
 
-                // здесь получить json значений
+                // get json with available options
                 var opt_str = '';
                 $.get("getoptions/" + fieldId + "/", function (data) {
 
@@ -83,7 +83,7 @@ django.jQuery(function ($) {
 
                         var inputLength = 0;
 
-                        //пересчитаем инпуты, содержащие значения, пустые будут мешать построить валидный json
+                        //Recount input fields, empty input fields break json
                         $(".user_field_opt_" + globalID).each(function () {
                             if (this.value) {
 
@@ -123,7 +123,7 @@ django.jQuery(function ($) {
     });
 
 
-    //выбор пользователем поля типа select
+    //user chooses a "select" field
     $('select[id$="field_type"]').change(
         function (event) {
 
@@ -135,7 +135,7 @@ django.jQuery(function ($) {
 
                 if (fieldId) {
 
-                    var optionsDiv = '<div id="user_field_opts_container_' + this.id + '"><div>Варианты ответа</div><div><input type="text" class="user_field_opt_' + this.id + '" name="user_field_opt"/></div><a href="javascript:void(0)" id="user_field_add_btn_' + this.id + '">Добавить вариант</a> <a id="user_field_save_btn_' + this.id + '" href="javascript:void(0)">Сохранить</a></div>';
+                    var optionsDiv = '<div id="user_field_opts_container_' + this.id + '"><div>Options</div><div><input type="text" class="user_field_opt_' + this.id + '" name="user_field_opt"/></div><a href="javascript:void(0)" id="user_field_add_btn_' + this.id + '">Add option</a> <a id="user_field_save_btn_' + this.id + '" href="javascript:void(0)">Save</a></div>';
                     $('#' + this.id).after(optionsDiv);
 
                     $('#user_field_add_btn_' + this.id).click(
@@ -156,7 +156,7 @@ django.jQuery(function ($) {
 
                             var inputLength = 0;
 
-                            //пересчитаем инпуты, содержащие значения, пустые будут мешать построить валидный json
+                            //Recount input fields, empty input fields break json
                             $(".user_field_opt_" + globalID).each(function () {
                                 if (this.value) {
 
